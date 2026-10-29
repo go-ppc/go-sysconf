@@ -1,8 +1,8 @@
 module github.com/tklauser/go-sysconf
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/tklauser/numcpus v0.12.0
-	golang.org/x/sys v0.44.0
+	golang.org/x/sys v0.49.0
 )
