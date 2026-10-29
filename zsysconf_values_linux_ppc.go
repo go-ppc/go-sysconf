@@ -13,11 +13,13 @@
 // those take the ILP32 values here.
 //
 // Provenance caveat, deliberate: these are glibc's values. A musl-based ppc32
-// Linux (Adelie) reports some of them differently - PTHREAD_STACK_MIN in
-// particular is much smaller in musl. sysconf.CacheUsage() and friends therefore
-// return glibc's documented limits on such a system; nothing in syncthing's
-// closure depends on that difference. Fix the values from the target libc if a
-// consumer ever does.
+// Linux (Adelie, this port's test venue) reports some of them differently. That
+// is measured, not assumed: a probe run in the Adelie rootfs gives PAGESIZE 4096,
+// LOGIN_NAME_MAX 256 (both agreeing with these values) but HOST_NAME_MAX 255,
+// where glibc documents 64 - so SC_HOST_NAME_MAX answers 64 here where the
+// target's own libc says 255. Nothing in syncthing's closure depends on that
+// difference; fix the affected values from the target libc if a consumer ever
+// does. PTHREAD_STACK_MIN is also libc-specific and was not probed.
 package sysconf
 
 const (
